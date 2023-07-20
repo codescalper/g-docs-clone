@@ -4,12 +4,10 @@ const Document = require("./Document")
 mongoose.connect("mongodb://localhost:27017/google-docs-clone", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFinfAndModify:false,
-  useCreateIndex:true,
 })
 
 
-const io = require("socket.io")(3001, {
+const io = require("socket.io")(3002, {
   cors: {
     origin: "http://localhost:64773",
     methods: ["GET", "POST"],
