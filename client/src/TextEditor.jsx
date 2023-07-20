@@ -37,10 +37,10 @@ export default function TextEditor() {
     const handler = (delta )=>{
      quill.updateContents(delta) 
    }
-    quill.on('revieve-changes',handler)
+    quill.on('receive-changes',handler)
   
     return () =>{
-      quill.off('recieve-changes',handler)
+      quill.off('receive-changes',handler)
     }
   },[socket,quill])
 
@@ -53,17 +53,17 @@ useEffect(() =>{
     if(source !== 'user') return
     socket.emit('send-changes',delta)
  }
-  quill.on('text-change',handler)
+  quill.on('text-change', handler)
 
   return () =>{
-    quill.off('text-changes',handler)
+    quill.off('text-change',handler)
   }
-})
+},[socket, quill])
 
 const wrapperRef = useCallback(wrapper =>{
   if(wrapper ==null ) return 
 
-  wrapper.innerHTMl = ''
+  wrapper.innerHTML = ''
   const editor = document.createElement('div')
   wrapper.append(editor)
   const q = new Quill(editor,{theme : 'snow' ,modules:{toolbar : TOOLBAR_OPTIONS}})
